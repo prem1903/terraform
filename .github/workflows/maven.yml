@@ -20,6 +20,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - uses: actions/checkout@v2
+    - uses: max/secret-scan@master
+      with:
+        include_path: 'configuration/include_paths.txt'
+        exclude_path: 'configuration/exclude_paths.txt'
     - uses: actions/checkout@v3
     - name: Set up JDK 17
       uses: actions/setup-java@v3
