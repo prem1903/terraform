@@ -20,11 +20,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: max/secret-scan@master
-      with:
-        include_path: 'configuration/include_paths.txt'
-        exclude_path: 'configuration/exclude_paths.txt'
+    - name: "check is MY_SECRET exists"
+      env: 
+          super_secret: ${{ secrets.MY_SECRET }}
+      if: ${{ env.super_secret == '' }}
+      run: 'echo "echo the secret \"MY_SECRET\" has not been made; echo please go to \"settings \> secrets \> actions\" to create it"
     - uses: actions/checkout@v3
     - name: Set up JDK 17
       uses: actions/setup-java@v3
